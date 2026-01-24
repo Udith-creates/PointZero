@@ -1,0 +1,58 @@
+{
+  "name": "blink-tickets",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "scripts": {
+    "account": "yarn workspace @blink-tickets/hardhat account",
+    "chain": "yarn workspace @blink-tickets/hardhat chain",
+    "compile": "yarn workspace @blink-tickets/hardhat compile",
+    "deploy": "yarn workspace @blink-tickets/hardhat deploy",
+    "flatten": "yarn workspace @blink-tickets/hardhat flatten",
+    "fork": "yarn workspace @blink-tickets/hardhat fork",
+    "format": "yarn next:format && yarn hardhat:format",
+    "generate": "yarn workspace @blink-tickets/hardhat generate",
+    "hardhat-verify": "yarn workspace @blink-tickets/hardhat hardhat-verify",
+    "hardhat:format": "yarn workspace @blink-tickets/hardhat format",
+    "hardhat:lint": "yarn workspace @blink-tickets/hardhat lint",
+    "hardhat:lint-staged": "yarn workspace @blink-tickets/hardhat lint-staged",
+    "hardhat:test": "yarn workspace @blink-tickets/hardhat test",
+    "postinstall": "husky install",
+    "next:build": "yarn workspace @blink-tickets/nextjs build",
+    "next:check-types": "yarn workspace @blink-tickets/nextjs check-types",
+    "next:format": "yarn workspace @blink-tickets/nextjs format",
+    "next:lint": "yarn workspace @blink-tickets/nextjs lint",
+    "next:serve": "yarn workspace @blink-tickets/nextjs serve",
+    "precommit": "lint-staged",
+    "start": "yarn workspace @blink-tickets/nextjs dev",
+    "test": "yarn hardhat:test",
+    "vercel": "yarn workspace @blink-tickets/nextjs vercel",
+    "vercel:yolo": "yarn workspace @blink-tickets/nextjs vercel:yolo",
+    "verify": "yarn workspace @blink-tickets/hardhat verify",
+    "lint": "next lint",
+    "lint:skip": "exit 0"
+  },
+  "devDependencies": {
+    "@types/snarkjs": "^0",
+    "husky": "~8.0.3",
+    "lint-staged": "~13.2.2"
+  },
+  "engines": {
+    "node": ">=18.18.0"
+  },
+  "dependencies": {
+    "html5-qrcode": "^2.3.8",
+    "jsqr": "^1.4.0",
+    "qrcode.react": "^4.1.0",
+    "snarkjs": "^0.7.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint:skip"
+    }
+  }
+}
