@@ -12,17 +12,17 @@ contract RoyaltyManager {
     mapping(uint256 => RoyaltySplit) public royalties; // eventId => split
     
     function splitPayment(
-        uint256 eventId,
-        address organizer,
+        uint256 /* eventId */,
+        address /* organizer */,
         uint256 amount,
-        uint256 royaltyPercent
+        uint256 /* royaltyPercent */
     ) external pure returns (uint256 organizerAmount, uint256 platformAmount) {
         platformAmount = (amount * 2) / 100; // 2% platform fee
         organizerAmount = amount - platformAmount;
     }
     
     function processResaleSplit(
-        uint256 eventId,
+        uint256 /* eventId */,
         uint256 resalePrice,
         uint256 royaltyPercent
     ) external pure returns (uint256 organizerRoyalty, uint256 sellerProceeds) {

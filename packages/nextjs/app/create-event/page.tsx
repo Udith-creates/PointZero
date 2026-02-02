@@ -43,12 +43,11 @@ const CreateEvent = () => {
       setCurrentStep(currentStep + 1);
     } else {
       try {
-        const tx = await writeContractAsync({
+        const tx = await (writeContractAsync as any)({
           functionName: "createEvent",
           args: [
             formData.name,
             formData.description,
-            // formData.imageCID, // Not supported by contract
             BigInt(formData.startTime),
             BigInt(formData.endTime),
             formData.venueName,
@@ -57,10 +56,8 @@ const CreateEvent = () => {
             formData.state,
             formData.postalCode,
             formData.country,
-            // formData.isOnline, // Not supported by contract
             parseEther(formData.ticketPrice || "0"),
             BigInt(formData.maxAttendees),
-            // formData.isPrivate, // Not supported by contract
           ],
         });
 

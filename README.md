@@ -26,8 +26,20 @@ chmod +x setup.sh
 ./setup.sh
 ```
 
-### 2. Manual Start
+### 2. One-Command Start (Windows)
+After setup, you can launch everything with a single command:
+
+```bash
+.\pointzero.bat
+# OR
+yarn pointzero
+```
+This will open separate terminal windows for the Blockchain, Deployment, Backend, and Frontend.
+
+### 3. Manual Start
 Once setup is complete, you need to run these **4 commands in separate terminals**:
+
+
 
 **Terminal 1: Start Blockchain**
 ```bash

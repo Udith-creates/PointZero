@@ -34,6 +34,7 @@
     "vercel:yolo": "yarn workspace @blink-tickets/nextjs vercel:yolo",
     "verify": "yarn workspace @blink-tickets/hardhat verify",
     "lint": "next lint",
+    "pointzero": ".\\pointzero.bat",
     "lint:skip": "exit 0"
   },
   "devDependencies": {

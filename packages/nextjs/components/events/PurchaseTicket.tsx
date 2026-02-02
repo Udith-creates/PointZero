@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { sha256 } from "js-sha256";
 import { parseEther } from "viem";
 import { useAccount } from "wagmi";
-import { useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
+import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 import { notification } from "~~/utils/scaffold-eth";
 
 interface PurchaseTicketProps {
@@ -23,25 +23,7 @@ export const PurchaseTicket = ({ eventId, ticketPrice, onSuccess, onClose }: Pur
     cvv: "",
   });
 
-  const { writeAsync: issueTicket, isLoading: isIssuing } = useScaffoldContractWrite({
-    contractName: "IssueTicket",
-    functionName: "issueTicket",
-    value: parseEther(ticketPrice),
-    args: [
-      "0x" + "0".repeat(64), // Placeholder for hash1
-      "0x" + "0".repeat(64), // Placeholder for hash2
-      BigInt(0), // Placeholder for eventId
-    ],
-    onSuccess: () => {
-      notification.success("Ticket purchased successfully!");
-      onSuccess?.();
-      onClose();
-    },
-    onError: (error: Error) => {
-      console.error("Error purchasing ticket:", error);
-      notification.error("Failed to purchase ticket: " + error.message);
-    },
-  });
+  const { writeContractAsync: issueTicket, isMining: isIssuing } = useScaffoldWriteContract("IssueTicket");
 
   const handlePurchase = async () => {
     if (!isConnected || !address) {
@@ -58,8 +40,16 @@ export const PurchaseTicket = ({ eventId, ticketPrice, onSuccess, onClose }: Pur
       const hash1 = sha256(userDetails.aadhar + userDetails.creditCard + userDetails.cvv);
       const hash2 = sha256(hash1 + eventId);
 
-      await issueTicket({
+      await (issueTicket as any)({
+        functionName: "issueTicket",
         args: [`0x${hash1}`, `0x${hash2}`, BigInt(eventId)],
+        value: parseEther(ticketPrice),
+      }, {
+        onSuccess: () => {
+          notification.success("Ticket purchased successfully!");
+          onSuccess?.();
+          onClose();
+        },
       });
     } catch (error) {
       console.error("Error purchasing ticket:", error);

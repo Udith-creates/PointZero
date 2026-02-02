@@ -15,8 +15,8 @@ const VerifyTicket = () => {
   const expectedEventId = searchParams.get('eventId');
 
   // Read Ticket Owner based on scanned Token ID
-  const { data: ticketOwner } = useScaffoldReadContract({
-    contractName: "EventTicket",
+  const { data: ticketOwner } = (useScaffoldReadContract as any)({
+    contractName: "IssueTicket",
     functionName: "ownerOf",
     args: [data ? BigInt(data.tokenId) : 0n],
   });
